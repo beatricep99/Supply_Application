@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Supply_Application.ListPage"
+             BackgroundColor="Beige">
+    <ContentPage.Content xmlns:local="clr-namespace:Supply_Application">
+        <ScrollView>
+            <StackLayout Margin="20">
+                <Editor Placeholder="Enter the title of the supply list" Text="{Binding Name}" HeightRequest="80">
+                    <Editor.Behaviors>
+                        <local:ValidationBehaviour />
+                    </Editor.Behaviors>
+                </Editor>
+
+                <Editor Placeholder="Enter the description of the supply list" Text="{Binding Description}" HeightRequest="80" />
+
+                <Button Text="Add/Choose Item to buy" Clicked="OnChooseButtonClicked" IsEnabled="{Binding Exists}" BackgroundColor="#F2BCB5" TextColor="#1C6D69"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Text="Save" Clicked="OnSaveButtonClicked" BackgroundColor="#D37579" TextColor="White" />
+                    <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked"  BackgroundColor="#1C6D69" TextColor="White"/>
+                </Grid>
+
+
+                <ListView x:Name="listView" ItemSelected="OnListViewItemSelected" VerticalScrollBarVisibility="Always"  VerticalOptions="FillAndExpand">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Detail="{Binding Description}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
